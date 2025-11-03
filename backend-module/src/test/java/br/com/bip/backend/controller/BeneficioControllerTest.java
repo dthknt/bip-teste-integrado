@@ -1,4 +1,4 @@
-package br.com.bip.backend;
+package br.com.bip.backend.controller;
 
 import br.com.bip.backend.dto.BeneficioRequestDTO;
 import br.com.bip.backend.dto.BeneficioResponseDTO;
