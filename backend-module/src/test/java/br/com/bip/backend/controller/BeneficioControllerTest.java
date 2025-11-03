@@ -7,7 +7,6 @@ import br.com.bip.backend.service.BeneficioService;
 import br.com.bip.ejb.exception.TransferenciaException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -18,12 +17,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -50,9 +47,6 @@ public class BeneficioControllerTest {
 
    @Autowired
    private ObjectMapper objectMapper;
-
-   @Autowired
-   private WebApplicationContext webApplicationContext;
 
    @Configuration
    @Import(BeneficioController.class)
@@ -85,13 +79,6 @@ public class BeneficioControllerTest {
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
          }
       }
-   }
-
-   @BeforeEach
-   void setUp() {
-      mockMvc = MockMvcBuilders
-               .webAppContextSetup(webApplicationContext)
-               .build();
    }
 
    private BeneficioResponseDTO createBeneficioResponseDTO(Long id, String nome) {
