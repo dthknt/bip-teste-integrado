@@ -1,7 +1,5 @@
-<!-- O Backdrop (fundo) do modal, (click) fecha o modal -->
 <div class="modal-backdrop" (click)="onClose()"></div>
 
-<!-- O Conteúdo do Modal -->
 <div class="modal-content">
   <header class="modal-header">
     <h2>
@@ -10,9 +8,7 @@
     <button class="modal-close-btn" (click)="onClose()">×</button>
   </header>
 
-  <!-- Formulário Reativo -->
   <form class="modal-body" [formGroup]="beneficioForm" (ngSubmit)="onSubmit()">
-    <!-- Campo Nome -->
     <div class="form-item">
       <label for="nome">Nome</label>
       <input
@@ -30,7 +26,6 @@
       }
     </div>
 
-    <!-- Campo Descrição -->
     <div class="form-item">
       <label for="descricao">Descrição</label>
       <input
@@ -41,7 +36,6 @@
       />
     </div>
 
-    <!-- Campo Valor -->
     <div class="form-item">
       <label for="valor">Valor (R$)</label>
       <input
@@ -60,7 +54,6 @@
       }
     </div>
 
-    <!-- Campo Ativo (Switch) -->
     <div class="form-item form-item-switch">
       <label for="ativo">Benefício Ativo?</label>
       <label class="switch">

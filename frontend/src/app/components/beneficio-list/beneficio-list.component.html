@@ -1,14 +1,12 @@
 <div class="container">
   <header>
     <h1>Gestão de Benefícios</h1>
-    <!-- Agrupando os botões -->
     <div class="header-actions">
       <button
         (click)="openForm()"
         class="btn btn-primary"
       >Adicionar Benefício</button>
 
-      <!-- BOTÃO DE TRANSFERÊNCIA (agora abre o modal) -->
       <button
         (click)="openTransferModal()"
         class="btn btn-secondary"
@@ -20,7 +18,6 @@
     <table>
       <thead>
       <tr>
-        <!-- Colunas originais -->
         <th>ID</th>
         <th>Nome</th>
         <th>Valor</th>
@@ -31,7 +28,6 @@
       <tbody>
       @for (beneficio of beneficios(); track beneficio.id; let i = $index) {
       <tr>
-        <!-- Células ATUALIZADAS com data-label -->
         <td data-label="ID">{{ beneficio.id }}</td>
         <td data-label="Nome">{{ beneficio.nome }}</td>
         <td data-label="Valor">{{ beneficio.valor | currency:'BRL' }}</td>
@@ -41,14 +37,12 @@
               </span>
         </td>
         <td data-label="Ações" class="actions">
-          <!-- Classes dos botões ATUALIZADAS -->
           <button class="btn-edit" (click)="openForm(beneficio)">Editar</button>
           <button class="btn-delete" (click)="onDelete(beneficio.id!)">Excluir</button>
         </td>
       </tr>
       } @empty {
       <tr>
-        <!-- Colspan original -->
         <td colspan="5" class="empty-state">Nenhum benefício cadastrado.</td>
       </tr>
       }
@@ -57,7 +51,6 @@
   </div>
 </div>
 
-<!-- Modal de Formulário (Existente) -->
 @if (showForm()) {
 <app-beneficio-form
   [beneficio]="beneficioSelecionado()"
@@ -66,18 +59,14 @@
 />
 }
 
-<!-- NOVO: Modal de Transferência -->
 @if (showTransferModal()) {
-  <!-- Overlay (fundo escuro) -->
   <div class="modal-overlay" (click)="closeTransferModal()"></div>
 
-  <!-- Conteúdo do Modal -->
   <div class="modal-content transfer-modal">
     <h2>Transferir Saldo</h2>
     <button class="close-btn" (click)="closeTransferModal()">X</button>
 
     <div class="transfer-form">
-      <!-- Lista "De" (ATUALIZADA) -->
       <div class="form-group">
         <label for="transfer-de">De:</label>
         <select id="transfer-de" [value]="transferDeId() ?? ''" (change)="onDeChange($event)">
@@ -86,7 +75,6 @@
             <option [value]="beneficio.id">{{ beneficio.nome }}</option>
           }
         </select>
-        <!-- Display de Saldo Origem (CORRIGIDO) -->
         <div class="saldo-display">
           <span>Saldo Atual:</span>
           @if (transferDeBeneficio(); as beneficio) {
@@ -97,20 +85,18 @@
         </div>
       </div>
 
-      <!-- NOVO: Campo Valor a Transferir (Req 2) -->
       <div class="form-group">
         <label for="transfer-valor">Valor a Transferir:</label>
-        <input 
-          id="transfer-valor" 
-          type="text" 
-          inputmode="decimal" 
+        <input
+          id="transfer-valor"
+          type="text"
+          inputmode="decimal"
           placeholder="0,00"
           [value]="transferValor() ?? ''"
           (input)="onTransferValorChange($event)"
         />
       </div>
 
-      <!-- Lista "Para" (ATUALIZADA) -->
       <div class="form-group">
         <label for="transfer-para">Para:</label>
         <select id="transfer-para" [value]="transferParaId() ?? ''" (change)="onParaChange($event)">
@@ -119,7 +105,6 @@
             <option [value]="beneficio.id">{{ beneficio.nome }}</option>
           }
         </select>
-        <!-- Display de Saldo Destino (CORRIGIDO) -->
         <div class="saldo-display">
           <span>Saldo Atual:</span>
           @if (transferParaBeneficio(); as beneficio) {
@@ -130,7 +115,6 @@
         </div>
       </div>
 
-      <!-- Ações do Modal -->
       <div class="modal-actions">
         <button class="btn btn-secondary" (click)="closeTransferModal()">Cancelar</button>
         <button class="btn btn-primary" (click)="onTransfer()">Confirmar</button>
