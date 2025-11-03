@@ -1,0 +1,65 @@
+.notification-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius);
+  color: var(--color-white);
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+
+  /* ADICIONADO: Layout Flexbox */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  min-width: 320px;
+}
+
+.notification-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  line-height: 1.4;
+}
+.notification-content small {
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-white);
+  font-size: 1.75rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+.close-btn:hover {
+  opacity: 1;
+}
+
+.notification-success {
+  background-color: var(--color-success);
+}
+.notification-error {
+  background-color: var(--color-danger);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

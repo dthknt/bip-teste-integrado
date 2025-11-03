@@ -1,0 +1,80 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven.apache.org.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.5</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>br.com.bip</groupId>
+    <artifactId>bip-teste-integrado-parent</artifactId>
+    <version>1.0.0</version>
+
+    <packaging>pom</packaging>
+
+    <name>bip-teste-integrado</name>
+    <description>Projeto agregador para o teste integrado BIP</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <springdoc.version>2.5.0</springdoc.version>
+    </properties>
+
+    <modules>
+        <module>backend-module</module>
+        <module>ejb-module</module>
+        <module>ear-module</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <scope>provided</scope>
+            </dependency>
+            <!--
+              Gerencia a versão do seu próprio backend-module,
+              para que o ejb-module possa depender dele facilmente.
+            -->
+            <dependency>
+                <groupId>com.example</groupId>
+                <artifactId>backend-module</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!--
+              Centralizar dependencias para modulos
+            <dependency>
+                <groupId>jakarta.platform</groupId>
+                <artifactId>jakarta.jakartaee-bom</artifactId>
+                <version>10.0.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            -->
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <!--
+              Centralizando as versões dos plugins.
+              spring-boot-maven-plugin só deve ser aplicado
+              no módulo executável (backend-module), não no pai.
+            -->
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>3.2.5</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

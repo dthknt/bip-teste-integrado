@@ -1,0 +1,83 @@
+<!-- O Backdrop (fundo) do modal, (click) fecha o modal -->
+<div class="modal-backdrop" (click)="onClose()"></div>
+
+<!-- O Conteúdo do Modal -->
+<div class="modal-content">
+  <header class="modal-header">
+    <h2>
+      @if (beneficio) { Editar Benefício } @else { Adicionar Novo Benefício }
+    </h2>
+    <button class="modal-close-btn" (click)="onClose()">×</button>
+  </header>
+
+  <!-- Formulário Reativo -->
+  <form class="modal-body" [formGroup]="beneficioForm" (ngSubmit)="onSubmit()">
+    <!-- Campo Nome -->
+    <div class="form-item">
+      <label for="nome">Nome</label>
+      <input
+        id="nome"
+        type="text"
+        placeholder="Ex: Vale Refeição"
+        formControlName="nome"
+        [class.is-invalid]="nome?.invalid && (nome?.dirty || nome?.touched)"
+      />
+      @if (nome?.invalid && (nome?.dirty || nome?.touched)) {
+      <div class="form-error">
+        @if (nome?.errors?.['required']) { Nome é obrigatório. } @if
+        (nome?.errors?.['minlength']) { Deve ter ao menos 3 caracteres. }
+      </div>
+      }
+    </div>
+
+    <!-- Campo Descrição -->
+    <div class="form-item">
+      <label for="descricao">Descrição</label>
+      <input
+        id="descricao"
+        type="text"
+        placeholder="Ex: Crédito mensal para alimentação"
+        formControlName="descricao"
+      />
+    </div>
+
+    <!-- Campo Valor -->
+    <div class="form-item">
+      <label for="valor">Valor (R$)</label>
+      <input
+        id="valor"
+        type="number"
+        min="0"
+        step="0.01"
+        placeholder="0.00"
+        formControlName="valor"
+        [class.is-invalid]="valor?.invalid && (valor?.dirty || valor?.touched)"
+      />
+      @if (valor?.invalid && (valor?.dirty || valor?.touched)) {
+      <div class="form-error">
+        Valor é obrigatório e deve ser positivo.
+      </div>
+      }
+    </div>
+
+    <!-- Campo Ativo (Switch) -->
+    <div class="form-item form-item-switch">
+      <label for="ativo">Benefício Ativo?</label>
+      <label class="switch">
+        <input id="ativo" type="checkbox" formControlName="ativo" />
+        <span class="slider"></span>
+      </label>
+    </div>
+  </form>
+
+  <footer class="modal-footer">
+    <button class="btn btn-secondary" (click)="onClose()">Cancelar</button>
+    <button
+      class="btn btn-primary"
+      (click)="onSubmit()"
+      [disabled]="beneficioForm.invalid || submitting()"
+    >
+      @if(submitting()) { Salvando... } @else { Salvar Benefício }
+    </button>
+  </footer>
+</div>

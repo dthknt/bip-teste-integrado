@@ -1,0 +1,17 @@
+@if (notification()) {
+<div class="notification-toast" [class]="'notification-' + notification()!.type">
+
+  <div class="notification-content">
+    <strong>{{ notification()!.type === 'success' ? 'Sucesso' : 'Erro' }}</strong>
+
+    <span>{{ notification()!.message }}</span>
+
+    @if (notification()!.details) {
+    <small>{{ notification()!.details }}</small>
+    }
+  </div>
+
+  <button class="close-btn" (click)="clearNotification()" title="Fechar">&times;</button>
+</div>
+}
+

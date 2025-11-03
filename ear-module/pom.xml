@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven.apache.org.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>br.com.bip</groupId>
+        <artifactId>bip-teste-integrado-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>ear-module</artifactId>
+
+    <packaging>ear</packaging>
+
+    <name>ear-module</name>
+    <description>Módulo EAR que empacota o WAR e EJB</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>br.com.bip</groupId>
+            <artifactId>backend-module</artifactId>
+            <version>1.0.0</version>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>br.com.bip</groupId>
+            <artifactId>ejb-module</artifactId>
+            <version>1.0.0</version>
+            <type>ejb</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <version>10</version>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <modules>
+                        <webModule>
+                            <groupId>br.com.bip</groupId>
+                            <artifactId>backend-module</artifactId>
+                            <contextRoot>/bip-backend</contextRoot>
+                        </webModule>
+
+                        <ejbModule>
+                            <groupId>br.com.bip</groupId>
+                            <artifactId>ejb-module</artifactId>
+                        </ejbModule>
+                    </modules>
+                    <!-- compatibilidade para Springboot (/libs)-->
+                    <skinnyWars>true</skinnyWars>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

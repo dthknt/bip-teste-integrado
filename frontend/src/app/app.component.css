@@ -1,0 +1,36 @@
+/* <app-root> */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f4f7f6;
+  color: #333;
+}
+
+.app-header {
+  width: 100%;
+  background-color: #004a91;
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0; /* Impede que o header encolha */
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+main.container {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  flex-grow: 1; /* Faz o 'main' ocupar todo o espaço restante */
+}
+
